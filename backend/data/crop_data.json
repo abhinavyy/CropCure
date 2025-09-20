@@ -1,0 +1,254 @@
+[
+  {
+    "crop": "Pepper (Bell)",
+    "disease": "Bacterial Spot",
+    "symptoms": "Water-soaked spots on leaves and fruits, dark lesions with yellow halos.",
+    "treatment": "Spray copper-based bactericides every 7–10 days. Remove and destroy infected plant parts.",
+    "prevention": "Use certified disease-free seeds. Avoid overhead irrigation to keep foliage dry. Practice crop rotation with non-host plants.",
+    "farmer_count": "Estimated 1-2 million bell pepper farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Horticulture Mission: https://hortipb.nic.in/"
+    ],
+    "resources": [
+      {"name": "ICAR Horticulture", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Pepper (Bell)",
+    "disease": "Healthy",
+    "symptoms": "No disease symptoms, vigorous growth, and healthy fruit development.",
+    "treatment": "Maintain good agronomic practices, including balanced fertilization and proper watering.",
+    "prevention": "Use certified seeds, ensure proper irrigation and fertilization, and monitor plants regularly for any signs of stress.",
+    "farmer_count": "Estimated 1-2 million bell pepper farmers in India",
+    "schemes": ["PM-Kisan Scheme: https://pmkisan.gov.in"],
+    "resources": [
+      {"name": "ICAR Horticulture", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Potato",
+    "disease": "Early Blight",
+    "symptoms": "Brown to black leaf spots with characteristic 'target spot' or concentric rings, leading to defoliation.",
+    "treatment": "Apply fungicides like chlorothalonil or mancozeb every 7–10 days, especially during humid weather.",
+    "prevention": "Use certified disease-free seed tubers, rotate crops with non-solanaceous plants, and remove plant debris after harvest.",
+    "farmer_count": "Approx 10 million potato farmers in India",
+    "schemes": [
+      "National Food Security Mission - Potato: https://nfsm.gov.in",
+      "PM-Kisan Scheme: https://pmkisan.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Potato Research", "link": "https://www.nrcp.in/"},
+      {"name": "Agriculture Dept Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Potato",
+    "disease": "Late Blight",
+    "symptoms": "Large, dark brown lesions on leaves and stems, with white fungal growth on the underside, especially in cool, moist conditions.",
+    "treatment": "Apply systemic fungicides like Ridomil Gold or protectant fungicides like mancozeb every 7 days.",
+    "prevention": "Use certified disease-free tubers, ensure good air circulation, and practice crop rotation.",
+    "farmer_count": "Approx 10 million potato farmers in India",
+    "schemes": [
+      "National Food Security Mission - Potato: https://nfsm.gov.in",
+      "PM-Kisan Scheme: https://pmkisan.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Potato Research", "link": "https://www.nrcp.in/"},
+      {"name": "Agriculture Dept Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Potato",
+    "disease": "Healthy",
+    "symptoms": "No disease symptoms, with healthy tubers and vibrant green leaves.",
+    "treatment": "Maintain crop rotation, balanced nutrition, and good farming practices.",
+    "prevention": "Use certified disease-free seeds and ensure proper irrigation to avoid water stress.",
+    "farmer_count": "Approx 10 million potato farmers in India",
+    "schemes": [
+      "National Food Security Mission - Potato: https://nfsm.gov.in",
+      "PM-Kisan Scheme: https://pmkisan.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Potato Research", "link": "https://www.nrcp.in/"},
+      {"name": "Agriculture Dept Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Bacterial Spot",
+    "symptoms": "Small, water-soaked spots on leaves and fruits, which later turn dark, raised, and scabby.",
+    "treatment": "Spray copper-based bactericides like copper oxychloride or copper hydroxide every 7–10 days.",
+    "prevention": "Use disease-free seeds, avoid overhead irrigation, and promptly remove and destroy infected plants.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Early Blight",
+    "symptoms": "Dark spots with concentric rings ('target spots') on lower leaves, which turn yellow and fall off.",
+    "treatment": "Spray fungicides like Mancozeb or chlorothalonil every 7–10 days upon first sign of disease.",
+    "prevention": "Avoid overhead watering, rotate crops annually with non-related plants, and maintain good garden sanitation.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Late Blight",
+    "symptoms": "Large, water-soaked, greasy-looking lesions that turn dark brown on leaves and stems, with white fungal growth on leaf undersides.",
+    "treatment": "Spray fungicides like Mancozeb or metalaxyl every 7 days during cool, wet weather.",
+    "prevention": "Use resistant varieties, avoid overhead irrigation, space plants for good air circulation, and remove affected plant debris.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Leaf Mold",
+    "symptoms": "Yellowish-green spots on upper leaf surfaces, with corresponding grayish, velvety mold growth on the undersides.",
+    "treatment": "Apply fungicides like copper oxychloride or sulfur. Improve air circulation by pruning and spacing plants.",
+    "prevention": "Avoid high humidity, provide good ventilation (especially in greenhouses), and avoid overhead irrigation.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Septoria Leaf Spot",
+    "symptoms": "Numerous small, circular spots with dark brown margins and gray or tan centers on leaves. Small black dots (fruiting bodies) may appear in the center.",
+    "treatment": "Spray fungicides like chlorothalonil or copper-based products regularly. Remove and destroy infected lower leaves.",
+    "prevention": "Practice crop rotation, avoid wetting the foliage when watering, and plant resistant varieties if available.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Spider Mites (Two-spotted Spider Mite)",
+    "symptoms": "Yellow stippling or tiny dots on leaves, fine webbing on the undersides of leaves and between stems.",
+    "treatment": "Use miticides like abamectin, spiromesifen, or spray horticultural oils like neem oil. Increase humidity to disrupt their life cycle.",
+    "prevention": "Avoid drought stress on plants, regularly inspect leaf undersides, and introduce natural predators like predatory mites.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Target Spot",
+    "symptoms": "Dark, necrotic spots with distinct concentric rings, similar to Early Blight but often smaller, appearing on leaves, stems, and fruits.",
+    "treatment": "Apply fungicides such as chlorothalonil or mancozeb every 7–10 days.",
+    "prevention": "Ensure good air circulation, avoid leaf wetness by using drip irrigation, and rotate crops.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Tomato Yellow Leaf Curl Virus",
+    "symptoms": "Severe yellowing and upward curling of young leaves, stunted plant growth, and significant reduction in fruit production.",
+    "treatment": "There is no chemical cure for the virus itself. Control the whitefly vector using systemic insecticides like imidacloprid.",
+    "prevention": "Use resistant plant varieties, remove and destroy infected plants immediately, and control whitefly populations with yellow sticky traps or insecticides.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Tomato Mosaic Virus",
+    "symptoms": "Light green and dark green mosaic patterns on leaves, leaf curling, yellowing, and reduced yield.",
+    "treatment": "No cure available. Immediately remove and destroy infected plants to prevent spread.",
+    "prevention": "Use certified virus-free seeds, sanitize tools and hands regularly, and avoid using tobacco products around tomato plants as they can carry the virus.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  },
+  {
+    "crop": "Tomato",
+    "disease": "Healthy",
+    "symptoms": "No visible disease symptoms, strong stems, lush green leaves, and healthy fruit development.",
+    "treatment": "Maintain balanced nutrition with appropriate fertilizers and ensure regular, deep watering.",
+    "prevention": "Use high-quality, disease-free seeds, practice crop rotation, and conduct regular monitoring for early signs of pests or diseases.",
+    "farmer_count": "Approx 120 million tomato farmers in India",
+    "schemes": [
+      "PM-Kisan Scheme: https://pmkisan.gov.in",
+      "Soil Health Card Scheme: https://soilhealth.dac.gov.in"
+    ],
+    "resources": [
+      {"name": "ICAR Plant Health", "link": "https://icar.org.in/"},
+      {"name": "National Agriculture Portal", "link": "https://agricoop.nic.in/"}
+    ],
+    "helpline": "1800-180-1551"
+  }
+]

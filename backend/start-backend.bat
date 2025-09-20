@@ -1,0 +1,1 @@
+"E:\crop model chat\backend\venv\Scripts\python.exe" "E:\crop model chat\backend\app.py"

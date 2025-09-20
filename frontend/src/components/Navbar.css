@@ -1,0 +1,167 @@
+/* --- Navbar Container --- */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 1200px;
+  height: 80px;
+  padding: 0 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 45px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: top 0.4s ease, transform 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Hide/Show on scroll */
+.navbar.hidden {
+  top: -100px;
+  opacity: 0;
+}
+
+.navbar.visible {
+  top: 20px;
+  opacity: 1;
+}
+
+.navbar:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* Logo */
+.navbar-logo h1 {
+  color: #4caf50;
+  font-size: 2.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-logo h1:hover {
+  transform: scale(1.1) rotate(-2deg);
+  color: #81c784;
+}
+
+/* Navbar Links */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  transition: all 0.3s ease;
+}
+
+/* Make buttons look like links without box */
+.navbar-links li button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  padding: 5px 0;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.navbar-links li button:focus {
+  outline: none; /* Remove focus box */
+}
+
+/* Gradient underline effect */
+.navbar-links li button::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -6px;
+  left: 0;
+  background: linear-gradient(90deg, #00ff99, #00ccff);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.navbar-links li button:hover::after {
+  width: 100%;
+}
+
+.navbar-links li button:hover {
+  color: #00ff99;
+  text-shadow: 0 2px 8px rgba(0, 255, 153, 0.5);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: #00ff99; /* hamburger color */
+  border-radius: 5px;
+  transition: all 0.4s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+  background: #00ccff; /* optional active color */
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+  background: #00ccff; /* optional active color */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    height: 60px;
+    padding: 8px 20px;
+    flex-direction: column;
+    border-radius: 10px;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    background: rgba(0, 0, 0, 0.95);
+    height: calc(100vh - 60px);
+    width: 220px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+    gap: 30px;
+    transition: right 0.35s ease;
+    z-index: 999;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .navbar-links.active {
+    right: 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}

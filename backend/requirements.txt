@@ -1,0 +1,16 @@
+flask
+flask-cors
+requests
+python-dotenv
+groq
+faiss-cpu
+sentence-transformers
+torch
+torchvision
+pillow
+numpy
+pandas
+matplotlib
+openai #new added
+requests
+opencv-python

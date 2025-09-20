@@ -1,0 +1,332 @@
+[
+  {
+    "region": "Andhra Pradesh",
+    "crops": [
+      {
+        "crop": "Chili",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Use disease-free seeds for best yield."
+      },
+      {
+        "crop": "Groundnut",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Profitable oilseed crop requiring well-drained soil."
+      },
+      {
+        "crop": "Paddy",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Cultivate in irrigated areas, water management essential."
+      }
+    ]
+  },
+  {
+    "region": "Arunachal Pradesh",
+    "crops": [
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Apr", "May"],
+        "recommendation": "Main crop grown in terrace fields, requires heavy rainfall."
+      },
+      {
+        "crop": "Maize",
+        "plantingMonths": ["Mar", "Apr"],
+        "recommendation": "Grows well in hilly regions with moderate rainfall."
+      },
+      {
+        "crop": "Millet",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Drought-resistant and suitable for upland cultivation."
+      }
+    ]
+  },
+  {
+    "region": "Assam and North Eastern States",
+    "crops": [
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Apr", "May"],
+        "recommendation": "Main staple with early summer planting."
+      },
+      {
+        "crop": "Tea",
+        "plantingMonths": ["Mar", "Apr"],
+        "recommendation": "Requires well-drained hilly terrain and ample rainfall."
+      },
+      {
+        "crop": "Jute",
+        "plantingMonths": ["Feb", "Mar"],
+        "recommendation": "Grown in hot, humid conditions with plenty of water."
+      },
+      {
+        "crop": "Pineapple",
+        "plantingMonths": ["Jan", "Feb"],
+        "recommendation": "Grows well in humid conditions, harvested year-round."
+      }
+    ]
+  },
+  {
+    "region": "Bihar",
+    "crops": [
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Kharif season crop requiring ample water."
+      },
+      {
+        "crop": "Wheat",
+        "plantingMonths": ["Nov", "Dec"],
+        "recommendation": "Rabi crop needing proper irrigation."
+      },
+      {
+        "crop": "Maize",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Alternative Kharif crop suitable in rainfed areas."
+      },
+      {
+        "crop": "Sugarcane",
+        "plantingMonths": ["Feb", "Mar"],
+        "recommendation": "Requires high water availability, profitable crop."
+      }
+    ]
+  },
+  {
+    "region": "Goa",
+    "crops": [
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Kharif rice, requires abundant water and warm weather."
+      },
+      {
+        "crop": "Cashew",
+        "plantingMonths": ["Jan", "Feb"],
+        "recommendation": "Thrives in laterite soil, needs moderate rainfall."
+      },
+      {
+        "crop": "Coconut",
+        "plantingMonths": ["Jan", "Feb"],
+        "recommendation": "Grows well in coastal belts with good drainage."
+      }
+    ]
+  },
+  {
+    "region": "Haryana",
+    "crops": [
+      {
+        "crop": "Wheat",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Sown in Rabi season, needs cool climate and irrigation."
+      },
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Kharif crop requiring water supply."
+      },
+      {
+        "crop": "Sugarcane",
+        "plantingMonths": ["Feb", "Mar"],
+        "recommendation": "Requires prolonged irrigation, commercially valuable crop."
+      }
+    ]
+  },
+  {
+    "region": "Jharkhand",
+    "crops": [
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Main Kharif crop, suitable for lowlands with adequate water."
+      },
+      {
+        "crop": "Maize",
+        "plantingMonths": ["Mar", "Apr"],
+        "recommendation": "Suitable as Rabi crop in uplands."
+      },
+      {
+        "crop": "Lentil",
+        "plantingMonths": ["Nov", "Dec"],
+        "recommendation": "Rabi pulse crop fixing nitrogen, improving soil health."
+      }
+    ]
+  },
+  {
+    "region": "Karnataka",
+    "crops": [
+      {
+        "crop": "Tomato",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Plant after monsoon ends, requires fertile soil."
+      },
+      {
+        "crop": "Ragi",
+        "plantingMonths": ["Aug", "Sep"],
+        "recommendation": "Drought tolerant and in demand cereal."
+      },
+      {
+        "crop": "Cotton",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Suitable for black cotton soil under monsoon."
+      },
+      {
+        "crop": "Groundnut",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Oilseed crop needing well-drained soil and moderate rainfall."
+      }
+    ]
+  },
+  {
+    "region": "Maharashtra",
+    "crops": [
+      {
+        "crop": "Cotton",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Main cash crop on black soil, planting during monsoon."
+      },
+      {
+        "crop": "Sugarcane",
+        "plantingMonths": ["Feb", "Mar"],
+        "recommendation": "Requires good irrigation, long duration crop."
+      },
+      {
+        "crop": "Soybean",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Short-duration crop, suitable for black and red soils."
+      }
+    ]
+  },
+  {
+    "region": "Odisha",
+    "crops": [
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Kharif crop requiring good water supply."
+      },
+      {
+        "crop": "Black Gram",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Rabi pulse crop suitable for upland areas."
+      },
+      {
+        "crop": "Groundnut",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Requires well-drained soil, profitable oilseed."
+      }
+    ]
+  },
+  {
+    "region": "Punjab",
+    "crops": [
+      {
+        "crop": "Wheat",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Sow wheat preferably from 4th week of October to 4th week of November. Use certified seeds, maintain proper irrigation. Grow in cool climate with 15-22°C."
+      },
+      {
+        "crop": "Mustard",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Plant as Rabi crop for good profitability."
+      },
+      {
+        "crop": "Sunflower",
+        "plantingMonths": ["Feb", "Mar"],
+        "recommendation": "Multiple harvests possible, plant in climate suitable for sunflower."
+      },
+      {
+        "crop": "Barley",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Short-duration Rabi crop, suitable for cool climate and well-drained soil."
+      }
+    ]
+  },
+  {
+    "region": "Rajasthan",
+    "crops": [
+      {
+        "crop": "Bajra (Pearl Millet)",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Drought resistant crop suitable for arid regions."
+      },
+      {
+        "crop": "Wheat",
+        "plantingMonths": ["Nov", "Dec"],
+        "recommendation": "Grown in irrigated areas during Rabi season."
+      },
+      {
+        "crop": "Moong (Green Gram)",
+        "plantingMonths": ["Jul", "Aug"],
+        "recommendation": "Short-duration pulse crop suitable for rainfed and irrigated regions."
+      }
+    ]
+  },
+  {
+    "region": "Tamil Nadu",
+    "crops": [
+      {
+        "crop": "Rice",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Main Kharif crop, requires irrigated conditions."
+      },
+      {
+        "crop": "Sugarcane",
+        "plantingMonths": ["Feb", "Mar"],
+        "recommendation": "Water-intensive, profitable commercial crop."
+      },
+      {
+        "crop": "Millets",
+        "plantingMonths": ["Sep", "Oct"],
+        "recommendation": "Suitable for dryland areas, drought tolerant."
+      }
+    ]
+  },
+  {
+    "region": "Uttar Pradesh",
+    "crops": [
+      {
+        "crop": "Wheat",
+        "plantingMonths": ["Nov", "Dec"],
+        "recommendation": "Cool season crop with irrigation."
+      },
+      {
+        "crop": "Sugarcane",
+        "plantingMonths": ["Feb", "Apr"],
+        "recommendation": "Water-intensive crop with high market demand."
+      },
+      {
+        "crop": "Maize",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Fast-growing, grows well in rainy season."
+      },
+      {
+        "crop": "Pulses",
+        "plantingMonths": ["Oct", "Nov"],
+        "recommendation": "Grow pigeon pea or lentils during Rabi, good for soil health."
+      }
+    ]
+  },
+  {
+    "region": "West Bengal",
+    "crops": [
+      {
+        "crop": "Rice-Aus",
+        "plantingMonths": ["Mar", "Apr"],
+        "recommendation": "Sow in early summer, ensure proper water management."
+      },
+      {
+        "crop": "Rice-Aman",
+        "plantingMonths": ["Jun", "Jul"],
+        "recommendation": "Main Kharif season rice, water management crucial."
+      },
+      {
+        "crop": "Rice-Boro",
+        "plantingMonths": ["Nov", "Dec"],
+        "recommendation": "Rabi season rice very profitable with irrigation."
+      },
+      {
+        "crop": "Jute",
+        "plantingMonths": ["Mar", "Apr"],
+        "recommendation": "Requires hot and humid climate with plenty of rainfall."
+      }
+    ]
+  }
+]
