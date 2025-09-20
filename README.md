@@ -9,13 +9,13 @@
 
 ---
 
-## ## About The Project
+## About The Project
 
 CropCure is a comprehensive, multi-featured web platform designed to serve as a complete agricultural assistant for the modern farmer. It leverages a powerful combination of Deep Learning and Large Language Models to provide tools that enhance decision-making and plant management. The platform's goal is to make expert agricultural knowledge accessible, instant, and easy to understand.
 
 ---
 
-## ## Key Features
+## Key Features
 
 CropCure is built around three core modules:
 
@@ -36,7 +36,7 @@ CropCure is built around three core modules:
 
 ---
 
-## ## Technology Stack
+## Technology Stack
 
 This project is built with a modern tech stack, separating the frontend and backend for a scalable architecture.
 
@@ -54,22 +54,22 @@ This project is built with a modern tech stack, separating the frontend and back
 
 ---
 
-## ## Getting Started
+## Getting Started
 
 To get a local copy up and running, follow these simple steps.
 
-### ### Prerequisites
+### Prerequisites
 
 Make sure you have the following installed on your system:
 * Node.js and npm (`https://nodejs.org/`)
 * Python 3.8+ and pip (`https://www.python.org/`)
 
-### ### Installation and Setup
+### Installation and Setup
 
 1.  **Clone the repository:**
     ```sh
-    git clone [your-repository-url]
-    cd [your-project-folder]
+    git clone https://github.com/abhinavyy/CropCure.git
+    cd CropCure
     ```
 
 2.  **Setup the Backend (Python):**
@@ -105,7 +105,7 @@ Make sure you have the following installed on your system:
         REACT_APP_API_URL="[http://127.0.0.1:5000](http://127.0.0.1:5000)"
         ```
 
-### ### Running the Application
+### Running the Application
 
 You need to run the backend and frontend servers in separate terminals.
 
@@ -127,12 +127,13 @@ You need to run the backend and frontend servers in separate terminals.
 
 ---
 
-## ## Acknowledgments
+## Acknowledgments
 
 This project was developed by: Abhinav Yadav
 
 ---
 
-## ## License
+## License
 
 This project is distributed under the MIT License. See `LICENSE` for more information.
+
