@@ -14,3 +14,4 @@ matplotlib
 openai #new added
 requests
 opencv-python
+seaborn

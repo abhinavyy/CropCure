@@ -8,27 +8,65 @@ import json
 import pickle
 import os
 import numpy as np
-import requests  # Added for OpenRouter API call
-import cv2  # For image processing in leaf detection
+import requests
+import cv2
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
 # --- Load Plant Disease Model ---
-with open("models/model_config.json", "r") as f:
-    config = json.load(f)
+# Load config with fallback values
+config_path = "models/model_config.json" if os.path.exists("models/model_config.json") else "model_config.json"
+try:
+    with open(config_path, "r") as f:
+        config = json.load(f)
+except:
+    config = {}
 
-# Load class names
-with open(config["class_names_path"], "r") as f:
-    class_names = json.load(f)
+# Load class names with fallback paths
+class_names_paths = [
+    config.get("class_names_path"),
+    "class_names.json",
+    "models/class_names.json"
+]
+class_names = ["Unknown Class"]
+for path in class_names_paths:
+    if path and os.path.exists(path):
+        try:
+            with open(path, "r") as f:
+                class_names = json.load(f)
+            print(f"Loaded class names from: {path}")
+            break
+        except:
+            continue
 
-# Load label encoder
-with open(config["label_encoder_path"], "rb") as f:
-    label_encoder = pickle.load(f)
+# Load label encoder with fallback paths
+label_encoder_paths = [
+    config.get("label_encoder_path"),
+    "label_encoder.pkl",
+    "models/label_encoder.pkl"
+]
+label_encoder = None
+for path in label_encoder_paths:
+    if path and os.path.exists(path):
+        try:
+            with open(path, "rb") as f:
+                label_encoder = pickle.load(f)
+            print(f"Loaded label encoder from: {path}")
+            break
+        except:
+            continue
 
-# Image transform (if transform.pkl not available)
+# If label encoder still not loaded, create a dummy one
+if label_encoder is None:
+    from sklearn.preprocessing import LabelEncoder
+    label_encoder = LabelEncoder()
+    label_encoder.fit(class_names)
+    print("Created dummy label encoder")
+
+# Image transform
 transform = transforms.Compose([
-    transforms.Resize((224, 224)),  # Resize to model input
+    transforms.Resize((256, 256)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
@@ -36,9 +74,32 @@ transform = transforms.Compose([
 # Initialize model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = PlantDiseaseModel(num_classes=len(class_names))
-model.load_state_dict(torch.load(config["model_path"], map_location=device, weights_only=True))
-model.to(device)
-model.eval()
+
+# Try to load model with fallback paths
+model_paths_to_try = [
+    config.get("model_path"),
+    "best_model.pth",
+    "models/best_model.pth",
+    "final_model.pth",
+    "models/final_model.pth"
+]
+
+model_loaded = False
+for model_path in model_paths_to_try:
+    if model_path and os.path.exists(model_path):
+        try:
+            model.load_state_dict(torch.load(model_path, map_location=device))
+            model.to(device)
+            model.eval()
+            model_loaded = True
+            print(f"Model loaded from: {model_path}")
+            break
+        except Exception as e:
+            print(f"Failed to load model from {model_path}: {e}")
+            continue
+
+if not model_loaded:
+    print("Warning: Could not load model weights. Using untrained model.")
 
 # --- Advanced Leaf Detection Function ---
 def is_leaf_image(image_path):
@@ -233,7 +294,7 @@ def indoor_plants_recommend():
         }
         
         payload = {
-            "model": "openai/gpt-3.5-turbo",  # You can change this to any model you prefer
+            "model": "openai/gpt-3.5-turbo",
             "messages": [
                 {
                     "role": "system",
@@ -266,7 +327,6 @@ def indoor_plants_recommend():
             recommendations = json.loads(content)
             return jsonify(recommendations)
         except json.JSONDecodeError:
-            # If the response isn't valid JSON, return it as text
             return jsonify({
                 "recommendations": [
                     {

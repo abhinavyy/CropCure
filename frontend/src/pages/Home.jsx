@@ -129,7 +129,8 @@ const Home = () => {
         {/* CTA Section */}
         <div className="cta-section">
           <div className="cta-content">
-            <h2>Healthier Crops, Higher Yields.Use AI to instantly diagnose diseases and get expert treatment plans.</h2>
+            <h2>Healthier Crops, Higher Yields</h2>
+            <h3>Use AI to instantly diagnose diseases and get expert treatment plans.</h3>
           </div>
         </div>
 
