@@ -348,11 +348,12 @@ def home():
     return "🌱 Welcome to CropCure Backend! Use /chat for chatbot, /predict for plant disease detection, and /indoor-plants/recommend for indoor plant advice."
 
 if __name__ == "__main__":
-    print("🌱 CropCure Backend running on http://127.0.0.1:5000")
+    port = int(os.environ.get("PORT", 5000))
+    print(f"🌱 CropCure Backend running on http://0.0.0.0:{port}")
     print("Available endpoints:")
     print("  - POST /chat : AI chatbot")
     print("  - POST /predict : Plant disease detection (now with leaf detection)") 
     print("  - POST /indoor-plants/recommend : Indoor plant recommendations")
     print("  - GET / : Home page")
     
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    app.run(host="0.0.0.0", port=port, debug=False)
