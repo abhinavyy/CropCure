@@ -15,6 +15,10 @@ CropCure is a comprehensive, multi-featured web platform designed to serve as a 
 
 ---
 
+<img width="2879" height="1468" alt="Screenshot 2025-11-21 164608" src="https://github.com/user-attachments/assets/a9d50d60-6904-4822-9347-07d38c279494" />
+<img width="2879" height="1455" alt="Screenshot 2025-11-21 164618" src="https://github.com/user-attachments/assets/93a70a19-360c-4125-8a5a-26ac5825e252" />
+<img width="2879" height="1454" alt="Screenshot 2025-11-21 164650" src="https://github.com/user-attachments/assets/f3841dbc-e62f-45cd-9ae6-3787c2cfe3c8" />
+
 ## Key Features
 
 CropCure is built around three core modules:
@@ -136,4 +140,5 @@ This project was developed by: Abhinav Yadav
 ## License
 
 This project is distributed under the MIT License. See `LICENSE` for more information.
+
 
