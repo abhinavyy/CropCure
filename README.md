@@ -137,8 +137,5 @@ This project was developed by: Abhinav Yadav
 
 ---
 
-## License
-
-This project is distributed under the MIT License. See `LICENSE` for more information.
 
 
