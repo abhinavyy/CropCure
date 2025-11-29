@@ -386,8 +386,6 @@ def test_leaf_verification():
 def home():
     return "🌱 Welcome to CropCure Backend! Use /chat for chatbot, /predict for plant disease detection, and /indoor-plants/recommend for indoor plant advice."
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
 '''
 if __name__ == "__main__":
