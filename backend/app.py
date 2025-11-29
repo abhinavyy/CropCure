@@ -387,6 +387,10 @@ def home():
     return "🌱 Welcome to CropCure Backend! Use /chat for chatbot, /predict for plant disease detection, and /indoor-plants/recommend for indoor plant advice."
 
 if __name__ == "__main__":
+    app.run(debug=True)
+
+'''
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     print(f"🌱 CropCure Backend running on http://0.0.0.0:{port}")
     print("Available endpoints:")
@@ -397,3 +401,4 @@ if __name__ == "__main__":
     print("  - GET / : Home page")
     
     app.run(host="0.0.0.0", port=port, debug=False)
+'''
