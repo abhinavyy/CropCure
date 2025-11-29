@@ -74,7 +74,7 @@ const PlantDiseaseChat = () => {
     formData.append("file", fileInputRef.current.files[0]);
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/predict", {
+      const res = await fetch("http://127.0.0.1:10000/predict", {
         method: "POST",
         body: formData,
       });

@@ -10,9 +10,67 @@ import os
 import numpy as np
 import requests
 import cv2
+from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
+
+# --- Load Leaf Verification Model ---
+class CNNModel(torch.nn.Module):
+    def __init__(self, img_size=128):
+        super(CNNModel, self).__init__()
+        self.conv_layers = torch.nn.Sequential(
+            torch.nn.Conv2d(3, 32, 3, padding=1), torch.nn.ReLU(), torch.nn.MaxPool2d(2,2),
+            torch.nn.Conv2d(32, 64, 3, padding=1), torch.nn.ReLU(), torch.nn.MaxPool2d(2,2),
+            torch.nn.Conv2d(64, 128, 3, padding=1), torch.nn.ReLU(), torch.nn.MaxPool2d(2,2)
+        )
+        self.fc_layers = torch.nn.Sequential(
+            torch.nn.Flatten(),
+            torch.nn.Linear(128 * (img_size//8) * (img_size//8), 128),
+            torch.nn.ReLU(),
+            torch.nn.Dropout(0.5),
+            torch.nn.Linear(128, 1),
+            torch.nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        x = self.conv_layers(x)
+        x = self.fc_layers(x)
+        return x
+
+# Initialize leaf verification model
+leaf_img_size = 128
+leaf_transform = transforms.Compose([
+    transforms.Resize((leaf_img_size, leaf_img_size)),
+    transforms.ToTensor()
+])
+
+leaf_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+leaf_model = CNNModel(img_size=leaf_img_size).to(leaf_device)
+
+# Try to load leaf verification model
+leaf_model_paths = [
+    "/content/drive/MyDrive/Plant_Dataset/image_classification/leaf_classifier.pth",
+    "models/leaf_classifier.pth",
+    "leaf_classifier.pth"
+]
+
+leaf_model_loaded = False
+for leaf_model_path in leaf_model_paths:
+    if os.path.exists(leaf_model_path):
+        try:
+            leaf_model.load_state_dict(torch.load(leaf_model_path, map_location=leaf_device))
+            leaf_model.to(leaf_device)
+            leaf_model.eval()
+            leaf_model_loaded = True
+            print(f"Leaf verification model loaded from: {leaf_model_path}")
+            break
+        except Exception as e:
+            print(f"Failed to load leaf model from {leaf_model_path}: {e}")
+            continue
+
+if not leaf_model_loaded:
+    print("Warning: Could not load leaf verification model weights.")
 
 # --- Load Plant Disease Model ---
 # Load config with fallback values
@@ -64,19 +122,19 @@ if label_encoder is None:
     label_encoder.fit(class_names)
     print("Created dummy label encoder")
 
-# Image transform
-transform = transforms.Compose([
+# Image transform for disease detection
+disease_transform = transforms.Compose([
     transforms.Resize((256, 256)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-# Initialize model
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = PlantDiseaseModel(num_classes=len(class_names))
+# Initialize disease model
+disease_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+disease_model = PlantDiseaseModel(num_classes=len(class_names))
 
-# Try to load model with fallback paths
-model_paths_to_try = [
+# Try to load disease model with fallback paths
+disease_model_paths = [
     config.get("model_path"),
     "best_model.pth",
     "models/best_model.pth",
@@ -84,109 +142,63 @@ model_paths_to_try = [
     "models/final_model.pth"
 ]
 
-model_loaded = False
-for model_path in model_paths_to_try:
-    if model_path and os.path.exists(model_path):
+disease_model_loaded = False
+for disease_model_path in disease_model_paths:
+    if disease_model_path and os.path.exists(disease_model_path):
         try:
-            model.load_state_dict(torch.load(model_path, map_location=device))
-            model.to(device)
-            model.eval()
-            model_loaded = True
-            print(f"Model loaded from: {model_path}")
+            disease_model.load_state_dict(torch.load(disease_model_path, map_location=disease_device))
+            disease_model.to(disease_device)
+            disease_model.eval()
+            disease_model_loaded = True
+            print(f"Disease model loaded from: {disease_model_path}")
             break
         except Exception as e:
-            print(f"Failed to load model from {model_path}: {e}")
+            print(f"Failed to load disease model from {disease_model_path}: {e}")
             continue
 
-if not model_loaded:
-    print("Warning: Could not load model weights. Using untrained model.")
+if not disease_model_loaded:
+    print("Warning: Could not load disease model weights. Using untrained model.")
 
-# --- Advanced Leaf Detection Function ---
-def is_leaf_image(image_path):
+# --- Leaf Verification Function ---
+def verify_leaf_image(image_path):
     """
-    Determine if an image contains a leaf using multiple image processing techniques.
+    Use the trained CNN model to verify if an image contains a leaf.
     Returns True if the image is likely a leaf, False otherwise.
     """
     try:
-        # Read the image
-        img = cv2.imread(image_path)
-        if img is None:
-            return False, "Failed to read image"
+        if not leaf_model_loaded:
+            return True, "Leaf verification model not available, skipping verification"
             
-        # Convert to HSV color space for better color segmentation
-        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        # Load and preprocess image
+        image = Image.open(image_path).convert('RGB')
+        image_tensor = leaf_transform(image).unsqueeze(0).to(leaf_device)
         
-        # Define green color ranges in HSV (for different shades of green)
-        lower_green1 = np.array([35, 40, 40])
-        upper_green1 = np.array([85, 255, 255])
-        lower_green2 = np.array([25, 40, 40])  # Some leaves have yellowish-green color
-        upper_green2 = np.array([35, 255, 255])
+        # Make prediction
+        with torch.no_grad():
+            output = leaf_model(image_tensor)
+            confidence = output.item()
+            
+        # DEBUG: Print raw confidence
+        print(f"DEBUG: Raw confidence score: {confidence}")
         
-        # Create masks for green regions
-        mask1 = cv2.inRange(hsv, lower_green1, upper_green1)
-        mask2 = cv2.inRange(hsv, lower_green2, upper_green2)
-        green_mask = cv2.bitwise_or(mask1, mask2)
+        # Try both interpretations and see which one makes sense
+        # Interpretation 1: confidence > 0.5 means leaf
+        is_leaf_interpretation1 = confidence > 0.5
+        # Interpretation 2: confidence < 0.5 means leaf (reversed)
+        is_leaf_interpretation2 = confidence < 0.5
         
-        # Calculate the percentage of green pixels
-        green_percentage = np.sum(green_mask > 0) / (img.shape[0] * img.shape[1])
+        print(f"DEBUG: Interpretation 1 (conf>0.5=leaf): {is_leaf_interpretation1}")
+        print(f"DEBUG: Interpretation 2 (conf<0.5=leaf): {is_leaf_interpretation2}")
         
-        # Additional check for leaf-like shapes using contour analysis
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        # For now, let's use interpretation 2 since you mentioned it might be reversed
+        is_leaf = is_leaf_interpretation2
+        leaf_confidence = 1 - confidence if is_leaf_interpretation2 else confidence
         
-        # Apply Gaussian blur to reduce noise
-        blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-        
-        # Use adaptive thresholding
-        thresh = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
-                                      cv2.THRESH_BINARY_INV, 11, 2)
-        
-        # Find contours
-        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        
-        # Filter contours by area and shape
-        leaf_contours = []
-        for contour in contours:
-            area = cv2.contourArea(contour)
-            if area > 500:  # Minimum area threshold
-                # Calculate contour properties
-                perimeter = cv2.arcLength(contour, True)
-                if perimeter > 0:
-                    circularity = 4 * np.pi * area / (perimeter * perimeter)
-                    # Leaves tend to have lower circularity (not perfect circles)
-                    if 0.1 < circularity < 0.8:  # Reasonable range for leaf shapes
-                        leaf_contours.append(contour)
-        
-        # Calculate the total area of potential leaf contours
-        leaf_contour_area = sum(cv2.contourArea(c) for c in leaf_contours)
-        total_contour_area = sum(cv2.contourArea(c) for c in contours if cv2.contourArea(c) > 500)
-        
-        # Calculate the ratio of leaf-like contour area to total contour area
-        if total_contour_area > 0:
-            leaf_contour_ratio = leaf_contour_area / total_contour_area
-        else:
-            leaf_contour_ratio = 0
-        
-        # Check multiple conditions to determine if it's a leaf
-        is_green_enough = green_percentage > 0.15  # At least 15% green
-        has_leaf_shapes = leaf_contour_ratio > 0.4  # At least 40% of contours are leaf-like
-        
-        # Calculate edge density for additional verification
-        edges = cv2.Canny(gray, 50, 150)
-        edge_density = np.sum(edges > 0) / (img.shape[0] * img.shape[1])
-        has_reasonable_edges = 0.01 < edge_density < 0.4  # Reasonable edge density
-        
-        # Final decision with confidence score
-        conditions_met = sum([is_green_enough, has_leaf_shapes, has_reasonable_edges])
-        confidence = conditions_met / 3.0
-        
-        # It's likely a leaf if at least 2 out of 3 conditions are met
-        is_leaf = conditions_met >= 2
-        
-        return is_leaf, f"Leaf detection confidence: {confidence:.2f}. Green percentage: {green_percentage:.2f}, Leaf contour ratio: {leaf_contour_ratio:.2f}"
+        return is_leaf, f"Leaf verification confidence: {leaf_confidence:.4f} (raw: {confidence:.4f})"
         
     except Exception as e:
-        print(f"Error in leaf detection: {e}")
-        return False, f"Error in leaf detection: {str(e)}"
+        print(f"Error in leaf verification: {e}")
+        return False, f"Error in leaf verification: {str(e)}"
 
 # --- Chatbot Endpoint ---
 @app.route("/chat", methods=["POST"])
@@ -210,18 +222,20 @@ def predict():
     file.save(temp_path)
 
     try:
-        # First check if the image is a leaf
-        is_leaf, detection_message = is_leaf_image(temp_path)
+        # First verify if the image is a leaf using the CNN model
+        is_leaf, verification_message = verify_leaf_image(temp_path)
+        print(f"DEBUG: Leaf verification result - is_leaf: {is_leaf}, message: {verification_message}")
+        
         if not is_leaf:
             os.remove(temp_path)
             return jsonify({
                 "error": "The uploaded image does not appear to be a plant leaf. Please upload a clear image of a plant leaf for disease detection.",
                 "is_leaf": False,
-                "detection_message": detection_message
+                "verification_message": verification_message
             }), 400
 
         # If it's a leaf, proceed with disease detection
-        class_name, confidence, all_probs = predict_image(model, temp_path, transform, device, label_encoder)
+        class_name, confidence, all_probs = predict_image(disease_model, temp_path, disease_transform, disease_device, label_encoder)
         os.remove(temp_path)
 
         # Top 5 predictions
@@ -235,7 +249,7 @@ def predict():
             "top_classes": top_classes,
             "top_probabilities": top_probs,
             "is_leaf": True,
-            "detection_message": detection_message
+            "verification_message": verification_message
         })
     except Exception as e:
         if os.path.exists(temp_path):
@@ -342,8 +356,44 @@ def indoor_plants_recommend():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# --- Test Leaf Verification Endpoint ---
+@app.route("/test-leaf", methods=["POST"])
+def test_leaf_verification():
+    """Endpoint to test leaf verification without disease detection"""
+    if "file" not in request.files:
+        return jsonify({"error": "No file provided"}), 400
+
+    file = request.files["file"]
+    temp_path = "test_leaf.jpg"
+    file.save(temp_path)
+
+    try:
+        is_leaf, verification_message = verify_leaf_image(temp_path)
+        os.remove(temp_path)
+        
+        return jsonify({
+            "is_leaf": is_leaf,
+            "verification_message": verification_message,
+            "note": "This is just for testing leaf verification"
+        })
+    except Exception as e:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+        return jsonify({"error": str(e)}), 500
+
 # --- Home Route ---
 @app.route("/", methods=["GET"])
 def home():
     return "🌱 Welcome to CropCure Backend! Use /chat for chatbot, /predict for plant disease detection, and /indoor-plants/recommend for indoor plant advice."
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    print(f"🌱 CropCure Backend running on http://0.0.0.0:{port}")
+    print("Available endpoints:")
+    print("  - POST /chat : AI chatbot")
+    print("  - POST /predict : Plant disease detection (with leaf verification)") 
+    print("  - POST /test-leaf : Test leaf verification only")
+    print("  - POST /indoor-plants/recommend : Indoor plant recommendations")
+    print("  - GET / : Home page")
+    
+    app.run(host="0.0.0.0", port=port, debug=False)
