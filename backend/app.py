@@ -11,6 +11,13 @@ import numpy as np
 import requests
 import cv2
 from PIL import Image
+import sys
+
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 app = Flask(__name__)
 CORS(app)
@@ -203,13 +210,18 @@ def verify_leaf_image(image_path):
 # --- Chatbot Endpoint ---
 @app.route("/chat", methods=["POST"])
 def chat():
-    data = request.get_json()
-    query = data.get("query", "")
-    if not query:
-        return jsonify({"error": "No query provided"}), 400
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
+        query = data.get("query", "")
+        if not query:
+            return jsonify({"error": "No query provided"}), 400
 
-    reply = ask_groq(query)
-    return jsonify({"reply": reply})
+        reply = ask_groq(query)
+        return jsonify({"reply": reply})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # --- Plant Disease Prediction Endpoint ---
 @app.route("/predict", methods=["POST"])
@@ -386,9 +398,38 @@ def test_leaf_verification():
 def home():
     return "🌱 Welcome to CropCure Backend! Use /chat for chatbot, /predict for plant disease detection, and /indoor-plants/recommend for indoor plant advice."
 
+# Serve frontend static files in production (optional)
+def setup_static_files():
+    """Serve frontend build files if they exist"""
+    frontend_build_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist")
+    if os.path.exists(frontend_build_path):
+        from flask import send_from_directory
+        @app.route("/<path:path>")
+        def serve_frontend(path):
+            """Serve frontend static files"""
+            if os.path.exists(os.path.join(frontend_build_path, path)):
+                return send_from_directory(frontend_build_path, path)
+            # For React Router - serve index.html for all non-API routes
+            if not path.startswith("api/") and not path.startswith("chat") and not path.startswith("predict"):
+                return send_from_directory(frontend_build_path, "index.html")
+            return jsonify({"error": "Not found"}), 404
+        
+        @app.route("/")
+        def serve_index():
+            """Serve frontend index.html"""
+            return send_from_directory(frontend_build_path, "index.html")
+        
+        print("Frontend static files will be served from backend")
+        return True
+    return False
+
+# Setup static file serving if in production mode
+if os.environ.get("FLASK_ENV") == "production":
+    setup_static_files()
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-    print(f"🌱 CropCure Backend running on http://0.0.0.0:{port}")
+    print(f"CropCure Backend running on http://0.0.0.0:{port}")
     print("Available endpoints:")
     print("  - POST /chat : AI chatbot")
     print("  - POST /predict : Plant disease detection (with leaf verification)") 

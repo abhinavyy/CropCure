@@ -111,23 +111,42 @@ Make sure you have the following installed on your system:
 
 ### Running the Application
 
-You need to run the backend and frontend servers in separate terminals.
+#### Option 1: Single Command (Recommended) 🚀
+
+**Using npm (Cross-platform):**
+```sh
+# From the root directory
+npm install  # Install root dependencies (concurrently, wait-on)
+npm start    # Starts both backend and frontend together
+```
+
+**Using Platform-Specific Scripts:**
+- **Windows:** Double-click `start.bat` or run `start.bat` in terminal
+- **Unix/Linux/Mac:** Run `bash start.sh` or `chmod +x start.sh && ./start.sh`
+
+The backend will run on `http://127.0.0.1:10000` and the frontend on `http://localhost:5173`.
+
+#### Option 2: Manual (Separate Terminals)
+
+You can also run the backend and frontend servers in separate terminals if needed.
 
 1.  **Run the Backend Server:**
-    * Open a terminal, navigate to the `backend/` folder, and activate the virtual environment.
+    * Open a terminal, navigate to the `backend/` folder, and activate the virtual environment (if using one).
     * Run the Flask server:
         ```sh
+        python app.py
+        # or
         flask run
         ```
-    * The backend will be running on `http://127.0.0.1:5000`.
+    * The backend will be running on `http://127.0.0.1:10000`.
 
 2.  **Run the Frontend Application:**
     * Open a second terminal and navigate to the `frontend/` folder.
     * Start the React development server:
         ```sh
-        npm start
+        npm run dev
         ```
-    * The application will open in your browser at `http://localhost:3000`.
+    * The application will open in your browser at `http://localhost:5173`.
 
 ---
 
