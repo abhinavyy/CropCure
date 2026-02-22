@@ -176,16 +176,13 @@ def verify_leaf_image(image_path):
         if not leaf_model_loaded:
             return True, "Leaf verification model not available, skipping verification"
             
-        # Load and preprocess image
         image = Image.open(image_path).convert('RGB')
         image_tensor = leaf_transform(image).unsqueeze(0).to(leaf_device)
         
-        # Make prediction
         with torch.no_grad():
             output = leaf_model(image_tensor)
             confidence = output.item()
             
-        # DEBUG: Print raw confidence
         print(f"DEBUG: Raw confidence score: {confidence}")
         
         # Try both interpretations and see which one makes sense
@@ -313,7 +310,6 @@ def indoor_plants_recommend():
         }}
         """
         
-        # Call OpenRouter API
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {openrouter_api_key}"
