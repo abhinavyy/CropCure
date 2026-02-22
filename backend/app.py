@@ -344,7 +344,6 @@ def indoor_plants_recommend():
         result = response.json()
         content = result['choices'][0]['message']['content']
         
-        # Parse the JSON response
         try:
             recommendations = json.loads(content)
             return jsonify(recommendations)
@@ -364,7 +363,6 @@ def indoor_plants_recommend():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# --- Test Leaf Verification Endpoint ---
 @app.route("/test-leaf", methods=["POST"])
 def test_leaf_verification():
     """Endpoint to test leaf verification without disease detection"""
