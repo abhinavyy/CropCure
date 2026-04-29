@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
 import API_BASE_URL from '../config/api';
 

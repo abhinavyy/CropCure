@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
 import { useLanguage } from '../context/LanguageContext';
 import API_BASE_URL from '../config/api';
