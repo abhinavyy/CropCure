@@ -10,7 +10,7 @@ tavily-python==0.3.9
 requests==2.31.0
 
 # RAG pipeline
-faiss-cpu==1.8.0
+faiss-cpu==1.13.2
 sentence-transformers==2.7.0
 
 # ML / Image processing
