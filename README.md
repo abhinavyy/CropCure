@@ -1,11 +1,24 @@
-# CropCure: An AI-Powered Agricultural Platform 🌿
+# 🌿 CropCure — AI-Powered Agricultural Platform
 
-**A smart farming web platform that provides instant plant disease diagnosis, state-wise crop recommendations, and personalized indoor plant guidance.**
+**A smart farming web platform that provides instant plant disease diagnosis, real-time crop news, personalized indoor plant guidance, and an AI agriculture chatbot.**
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-cropcure--frontend.onrender.com-10b981?style=for-the-badge)](https://cropcure-frontend.onrender.com/)
+[![Backend API](https://img.shields.io/badge/⚡_API-cropcure--backend.onrender.com-0f172a?style=for-the-badge)](https://cropcure-backend-xqmm.onrender.com/)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+---
+
+## 🔗 Live URLs
+
+| Service | URL |
+|---------|-----|
+| **Frontend** | [https://cropcure-frontend.onrender.com/](https://cropcure-frontend.onrender.com/) |
+| **Backend API** | [https://cropcure-backend-xqmm.onrender.com/](https://cropcure-backend-xqmm.onrender.com/) |
+
+> **Note:** Hosted on Render free tier — first load may take ~30s if the server is cold (spins down after 15 min of inactivity).
 
 ---
 
@@ -19,142 +32,165 @@ CropCure is a comprehensive, multi-featured web platform designed to serve as a 
 <img width="2879" height="1455" alt="Screenshot 2025-11-21 164618" src="https://github.com/user-attachments/assets/93a70a19-360c-4125-8a5a-26ac5825e252" />
 <img width="2879" height="1454" alt="Screenshot 2025-11-21 164650" src="https://github.com/user-attachments/assets/f3841dbc-e62f-45cd-9ae6-3787c2cfe3c8" />
 
+---
+
 ## Key Features
 
-CropCure is built around three core modules:
-
-1.  **🌱 AI-Powered Disease Diagnosis:**
-    * Upload an image of a sick plant leaf.
-    * Our **Convolutional Neural Network (CNN)** instantly identifies the disease with high accuracy.
-    * An integrated **LLM-powered chatbot** provides a conversational diagnosis and a step-by-step treatment plan.
-
-2.  **🗺️ State-Wise Crop Advisory:**
-    * Select your state from a dropdown menu.
-    * Receive a list of commercially viable and agronomically suitable crops based on regional climate, soil, and seasonality data.
-    * Make informed decisions for your next planting season.
-
-3.  **🌿 Personalized Indoor Plant Guide:**
-    * Specify your home's environmental conditions (e.g., light, humidity).
-    * Our **GPT-powered engine** generates a personalized list of suitable indoor plants.
-    * Includes detailed care instructions to help your plants thrive.
+| Feature | Description |
+|---------|-------------|
+| 🌱 **AI Disease Diagnosis** | Upload a plant leaf image → CNN identifies the disease → get treatment & prevention info from our knowledge base |
+| 💬 **AI Agriculture Chatbot** | Ask any farming question → powered by Groq (Llama-3.3-70b) with a crop disease knowledge base |
+| 📰 **Real-Time Crop News** | Latest agricultural news from India, powered by Tavily search API |
+| 🌤️ **Weather & Soil Data** | Location-based weather, soil moisture, and temperature data via AgroMonitoring API |
+| 🌿 **Indoor Plant Guide** | Specify your conditions → AI generates personalized indoor growing techniques |
+| 🗺️ **Crop Planner** | State-wise crop recommendations based on regional climate and soil data |
 
 ---
 
 ## Technology Stack
 
-This project is built with a modern tech stack, separating the frontend and backend for a scalable architecture.
+### Backend (Python + Flask)
+- **Flask** — REST API framework
+- **PyTorch** — CNN model inference for plant disease detection
+- **Groq API** — LLM chat (Llama-3.3-70b-versatile)
+- **Tavily API** — Real-time news search
+- **OpenRouter API** — Indoor plant recommendations (GPT-3.5)
+- **Gunicorn** — Production WSGI server
+- **Scikit-learn** — Label encoding for predictions
 
-**Backend:**
-* **Python:** The core language for the server.
-* **Flask:** A lightweight web framework to build the API.
-* **PyTorch/TensorFlow:** For running the CNN model inference.
-* **Scikit-learn:** For data pre-processing.
-* **LLM APIs:** Integration with APIs like **Llama-3** and **OpenRouter (GPT)**.
-
-
-**Frontend:**
-* **React.js:** For building the user interface.
-* **Styled-Components:** For styling the components.
+### Frontend (React + Vite)
+- **React 19** with React Router
+- **Vite** — Build tool
+- **Recharts** — Data visualization (weather charts)
+- **Styled-Components** — Component styling
+- **AgroMonitoring API** — Weather & soil data
 
 ---
 
-## Getting Started
+## Project Structure
 
-To get a local copy up and running, follow these simple steps.
+```
+CropCure/
+├── backend/
+│   ├── app.py                    # Flask API (5 endpoints)
+│   ├── rag_pipeline.py           # Groq chat with crop knowledge base
+│   ├── plant_disease_classifier.py  # PyTorch CNN model
+│   ├── models/                   # ML model weights (.pth, .pkl)
+│   ├── data/crop_data.json       # Crop disease knowledge base
+│   ├── requirements.txt
+│   ├── wsgi.py                   # Gunicorn entry point
+│   └── Procfile                  # Render process definition
+└── frontend/
+    └── src/
+        ├── App.jsx               # Main app with chatbot widget
+        ├── config/api.js         # Central API URL config
+        ├── pages/                # Home, Weather, News, CropPlanner, etc.
+        ├── components/           # NavBar, Footer, PlantDiseaseChat
+        ├── services/weatherApi.js
+        └── context/LanguageContext.jsx
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/` | Health check |
+| `POST` | `/chat` | AI agriculture chatbot |
+| `POST` | `/predict` | Plant disease detection (image upload) |
+| `GET` | `/news` | Latest crop news (Tavily) |
+| `POST` | `/indoor-plants/recommend` | Indoor plant recommendations |
+| `POST` | `/test-leaf` | Test leaf verification only |
+
+---
+
+## Getting Started (Local Development)
 
 ### Prerequisites
+- **Node.js 18+** and npm
+- **Python 3.10+** and pip
 
-Make sure you have the following installed on your system:
-* Node.js and npm (`https://nodejs.org/`)
-* Python 3.8+ and pip (`https://www.python.org/`)
+### Installation
 
-### Installation and Setup
-
-1.  **Clone the repository:**
+1. **Clone the repository:**
     ```sh
     git clone https://github.com/abhinavyy/CropCure.git
     cd CropCure
     ```
 
-2.  **Setup the Backend (Python):**
+2. **Setup the Backend:**
     ```sh
-    # Navigate to the backend folder
     cd backend
-
-    # Create and activate a virtual environment
     python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-
-    # Install the required packages
+    venv\Scripts\activate        # Windows
+    # source venv/bin/activate   # Mac/Linux
     pip install -r requirements.txt
     ```
 
-3.  **Setup the Frontend (React):**
+3. **Setup the Frontend:**
     ```sh
-    # Navigate to the frontend folder from the root directory
     cd frontend
-
-    # Install npm packages
     npm install
     ```
 
-4.  **Configure Environment Variables:**
-    * The backend requires API keys for the LLMs. In the `backend/` folder, create a `.env` file and add your keys:
-        ```
-        OPENROUTER_API_KEY="your_openrouter_api_key"
-        LLAMA_API_KEY="your_llama_api_key"
-        ```
-    * The frontend requires the backend API URL. In the `frontend/` folder, create a `.env` file:
-        ```
-        REACT_APP_API_URL="[http://127.0.0.1:5000](http://127.0.0.1:5000)"
-        ```
+4. **Configure Environment Variables:**
+
+    **`backend/.env`**
+    ```env
+    GROQ_API_KEY=your_groq_api_key
+    OPENROUTER_API_KEY=your_openrouter_api_key
+    TAVILY_API_KEY=your_tavily_api_key
+    PORT=10000
+    ```
+
+    **`frontend/.env`**
+    ```env
+    VITE_API_BASE_URL=http://127.0.0.1:10000
+    ```
 
 ### Running the Application
 
 #### Option 1: Single Command (Recommended) 🚀
-
-**Using npm (Cross-platform):**
 ```sh
 # From the root directory
-npm install  # Install root dependencies (concurrently, wait-on)
+npm install
 npm start    # Starts both backend and frontend together
 ```
 
-**Using Platform-Specific Scripts:**
-- **Windows:** Double-click `start.bat` or run `start.bat` in terminal
-- **Unix/Linux/Mac:** Run `bash start.sh` or `chmod +x start.sh && ./start.sh`
-
-The backend will run on `http://127.0.0.1:10000` and the frontend on `http://localhost:5173`.
-
 #### Option 2: Manual (Separate Terminals)
 
-You can also run the backend and frontend servers in separate terminals if needed.
+**Terminal 1 — Backend:**
+```sh
+cd backend
+python app.py
+# Runs on http://127.0.0.1:10000
+```
 
-1.  **Run the Backend Server:**
-    * Open a terminal, navigate to the `backend/` folder, and activate the virtual environment (if using one).
-    * Run the Flask server:
-        ```sh
-        python app.py
-        # or
-        flask run
-        ```
-    * The backend will be running on `http://127.0.0.1:10000`.
+**Terminal 2 — Frontend:**
+```sh
+cd frontend
+npm run dev
+# Runs on http://localhost:5173
+```
 
-2.  **Run the Frontend Application:**
-    * Open a second terminal and navigate to the `frontend/` folder.
-    * Start the React development server:
-        ```sh
-        npm run dev
-        ```
-    * The application will open in your browser at `http://localhost:5173`.
+---
+
+## Deployment (Render)
+
+The app is deployed as two separate services on [Render](https://render.com):
+
+| Service | Type | Root Directory | Build Command | Start/Publish |
+|---------|------|---------------|---------------|---------------|
+| Backend | Web Service | `backend` | `pip install -r requirements.txt` | `gunicorn wsgi:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120` |
+| Frontend | Static Site | `frontend` | `npm install && npm run build` | Publish: `dist` |
+
+**Frontend env var:** `VITE_API_BASE_URL = https://cropcure-backend-xqmm.onrender.com`
 
 ---
 
 ## Acknowledgments
 
-This project was developed by: Abhinav Yadav
+Developed by **Abhinav Yadav**
 
 ---
-
-
-
