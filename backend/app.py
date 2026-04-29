@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from tavily import TavilyClient
 from rag_pipeline import ask_groq
 from plant_disease_classifier import PlantDiseaseModel, predict_image
 from torchvision import transforms
@@ -204,6 +205,28 @@ def verify_leaf_image(image_path):
         print(f"Error in leaf verification: {e}")
         return False, f"Error in leaf verification: {str(e)}"
 
+# --- Tavily News Endpoint ---
+@app.route("/news", methods=["GET"])
+def get_crop_news():
+    try:
+        tavily_key = os.environ.get("TAVILY_API_KEY")
+        if not tavily_key:
+            return jsonify({"error": "Tavily API key not configured"}), 500
+        
+        tavily = TavilyClient(api_key=tavily_key)
+        
+        from datetime import datetime
+        current_year = datetime.now().year
+        # Search for latest agricultural news in India
+        # Using dynamic year for the most recent results
+        query = f"latest crop and agriculture news India {current_year}"
+        search_result = tavily.search(query=query, search_depth="advanced", max_results=6)
+        
+        return jsonify(search_result)
+    except Exception as e:
+        print(f"Tavily Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
 # --- Chatbot Endpoint ---
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -390,7 +413,7 @@ def test_leaf_verification():
 # --- Home Route ---
 @app.route("/", methods=["GET"])
 def home():
-    return "🌱 Welcome to CropCure Backend! Use /chat for chatbot, /predict for plant disease detection, and /indoor-plants/recommend for indoor plant advice."
+    return "🌱 Welcome to CropCure Backend! Use /chat for chatbot, /predict for plant disease detection, /news for crop news, and /indoor-plants/recommend for indoor plant advice."
 
 # Serve frontend static files in production (optional)
 def setup_static_files():
@@ -423,12 +446,14 @@ if os.environ.get("FLASK_ENV") == "production":
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
+    debug = os.environ.get("FLASK_ENV", "production") != "production"
     print(f"CropCure Backend running on http://0.0.0.0:{port}")
     print("Available endpoints:")
     print("  - POST /chat : AI chatbot")
     print("  - POST /predict : Plant disease detection (with leaf verification)") 
+    print("  - GET  /news : Real-time crop news (Tavily)")
     print("  - POST /test-leaf : Test leaf verification only")
     print("  - POST /indoor-plants/recommend : Indoor plant recommendations")
-    print("  - GET / : Home page")
+    print("  - GET  / : Home page")
     
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=debug)

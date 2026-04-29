@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/NavBar";
 import Home from "./pages/Home";
 import PlantDiseaseChat from "./components/PlantDiseaseChat.jsx";
 import CropPlanner from "./pages/CropPlanner.jsx";
 import WeatherPage from "./pages/WeatherPage";
 import IndoorPlants from "./pages/IndoorPlants.jsx";
+import About from "./pages/About.jsx";
+import NewsPage from "./pages/NewsPage.jsx";
+import { useLanguage } from "./context/LanguageContext";
+import API_BASE_URL from "./config/api";
 import "./App.css";
 
 // SVG icon for the send button
@@ -36,16 +40,22 @@ const ScrollToTop = () => {
 };
 
 function App() {
+  const { t, language } = useLanguage();
   // --- Chatbot state ---
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! I'm CropCure Bot. How can I help you with your plants today?" },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const messagesEndRef = useRef(null);
   const chatWidgetRef = useRef(null);
+
+  // Initialize messages when language changes
+  useEffect(() => {
+    setMessages([
+      { sender: "bot", text: t('botGreeting') },
+    ]);
+  }, [language, t]);
 
   const toggleChat = () => {
     if (isMinimized) {
@@ -72,7 +82,7 @@ function App() {
     setIsTyping(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:10000/chat", {
+      const res = await fetch(`${API_BASE_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query }),
@@ -119,9 +129,8 @@ function App() {
   }, [messages, isTyping]);
 
   return (
-    <Router>
-      {/* Navbar */}
-      <Navbar />
+    <>
+      {/* Scroll Restoration */}
 
       {/* Scroll Restoration */}
       <ScrollToTop />
@@ -133,6 +142,8 @@ function App() {
         <Route path="/weather" element={<WeatherPage />} />
         <Route path="/indoor-plants" element={<IndoorPlants />} />
         <Route path="/crop-planner" element={<CropPlanner />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/about" element={<About />} />
       </Routes>
 
       {/* --- Chatbot JSX --- */}
@@ -147,8 +158,8 @@ function App() {
         <div className="chat-header" onClick={isMinimized ? toggleChat : undefined}>
           <div className="avatar">🌱</div>
           <div className="header-title">
-            <h2>CropCure Bot</h2>
-            <span>{isMinimized ? "Click to open" : "Online"}</span>
+            <h2>{t('botName')}</h2>
+            <span>{isMinimized ? t('clickToOpen') : t('online')}</span>
           </div>
           {!isMinimized && (
             <button className="minimize-btn" onClick={minimizeChat} aria-label="Minimize">
@@ -184,7 +195,7 @@ function App() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about your plant..."
+                placeholder={t('askPlaceholder')}
               />
               <button type="submit" aria-label="Send">
                 <SendIcon />
@@ -195,9 +206,9 @@ function App() {
       </div>
 
       <button className={`chat-toggle-button ${isOpen || isMinimized ? "open" : ""}`} onClick={toggleChat}>
-        {isOpen || isMinimized ? '✕' : 'Ask Here 🌱'}
+        {isOpen || isMinimized ? '✕' : `${t('askHere')} 🌱`}
       </button>
-    </Router>
+    </>
   );
 }
 

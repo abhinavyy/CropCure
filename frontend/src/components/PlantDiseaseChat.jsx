@@ -1,4 +1,8 @@
 import React, { useState, useRef } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
+import API_BASE_URL from "../config/api";
 // 1. Import your JSON data file
 import diseaseData from '../data/crop_data.json';
 
@@ -22,6 +26,7 @@ const predictionMap = {
 };
 
 const PlantDiseaseChat = () => {
+  const { t } = useLanguage();
   const [image, setImage] = useState(null);
   const [predictions, setPredictions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -74,7 +79,7 @@ const PlantDiseaseChat = () => {
     formData.append("file", fileInputRef.current.files[0]);
 
     try {
-      const res = await fetch("http://127.0.0.1:10000/predict", {
+      const res = await fetch(`${API_BASE_URL}/predict`, {
         method: "POST",
         body: formData,
       });
@@ -141,452 +146,611 @@ const PlantDiseaseChat = () => {
         {`
           .plant-disease-chat-container {
             min-height: 100vh;
-            background-color: #f9fafb;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            color: #1f2937;
+            background: #f0fdf4 url('https://www.transparenttextures.com/patterns/p6.png'); /* Subtle grain texture */
+            font-family: 'Outfit', sans-serif;
+            color: #164e63;
+            padding-bottom: 4rem;
           }
-          .header {
-            position: relative;
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: white;
-            padding: 2rem 1rem;
+          
+          .disease-hero {
+            background: linear-gradient(rgba(20, 83, 45, 0.85), rgba(6, 78, 59, 0.95)),
+                        url('https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 20px 100px;
             text-align: center;
-            overflow: hidden;
-          }
-          .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23059669' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.3;
-          }
-          .header-content {
+            color: white;
+            clip-path: ellipse(150% 100% at 50% 0%);
+            margin-bottom: 3rem;
             position: relative;
-            z-index: 10;
           }
-          .header-content h1 {
-            font-size: 2.5rem;
+
+          .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.6s ease-out;
+          }
+
+          .disease-hero h1 {
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-top: 70px;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            animation: fadeInUp 0.8s ease-out;
           }
-          .header-content p {
+
+          .disease-hero p {
+            font-size: 1.25rem;
             max-width: 600px;
             margin: 0 auto;
-            font-size: 1.125rem;
-            opacity: 0.9;
-            font-weight: 500;
+            opacity: 0.95;
+            line-height: 1.5;
+            animation: fadeInUp 1s ease-out;
           }
-          .error-message {
-            background-color: #fef2f2;
-            border-left: 4px solid #ef4444;
-            color: #b91c1c;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
           }
-          .dismiss-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #b91c1c;
-            cursor: pointer;
-            padding: 0;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
+
           .main-content {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 2rem 1rem;
+            gap: 2.5rem;
+            padding: 0 20px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 5;
           }
-          @media (min-width: 768px) {
+
+          @media (min-width: 992px) {
             .main-content {
               grid-template-columns: 1fr 1fr;
             }
           }
-          .upload-card, .results-card {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+          .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 1.5rem; /* Reduced from 2.5rem */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
             height: fit-content;
           }
-          .upload-card h2, .results-card h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #064e3b;
-          }
-          .custom-file-upload {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: #10b981;
+
+          .card-header-icon {
+            width: 36px; /* Reduced from 50px */
+            height: 36px;
+            background: #10b981;
             color: white;
-            border-radius: 9999px;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 1.5rem;
-            width: 100%;
-            box-sizing: border-box;
-          }
-          .custom-file-upload:hover {
-            background-color: #059669;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          }
-          #file-upload {
-            display: none;
-          }
-          .image-preview {
-            margin-bottom: 1.5rem;
-          }
-          .image-preview img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          }
-          .detect-btn {
-            width: 100%;
-            padding: 0.875rem 1.5rem;
-            background: linear-gradient(to right, #10b981, #059669);
-            color: white;
-            border: none;
-            border-radius: 9999px;
-            font-weight: 700;
-            font-size: 1.125rem;
-            cursor: pointer;
-            transition: all 0.2s;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.2);
           }
-          .detect-btn:hover:not(:disabled) {
-            background: linear-gradient(to right, #059669, #047857);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.15);
-          }
-          .detect-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-          }
-          .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 2px solid white;
-            animation: spin 1s linear infinite;
-            margin-right: 0.5rem;
-          }
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-          .info-section {
-            background-color: #ecfdf5;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border-left: 4px solid #10b981;
-          }
-          .info-section h4 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            color: #065f46;
-            font-weight: 600;
-          }
-          .info-section ul {
-            margin: 0;
-            padding-left: 1.25rem;
-            color: #374151;
-          }
-          .info-section li {
-            margin-bottom: 0.25rem;
-            line-height: 1.5;
-          }
-          .results-content {
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-          }
-          .loading-spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #d1fae5;
-            border-top: 4px solid #10b981;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-          }
-          .predictions-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1.5rem 0;
-          }
-          .prediction-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            border-radius: 0.5rem;
-            background-color: #f9fafb;
-            border-left: 4px solid #e5e7eb;
-          }
-          .top-prediction {
-            background: linear-gradient(to right, #ecfdf5, #d1fae5);
-            border-left: 4px solid #10b981;
-          }
-          .prediction-info {
-            flex: 1;
-            margin-right: 1rem;
-          }
-          .disease-name {
-            display: block;
-            font-weight: 600;
-            text-transform: capitalize;
-            margin-bottom: 0.25rem;
-            color: #064e3b;
-          }
-          .confidence-value {
-            font-size: 0.875rem;
-            color: #6b7280;
-            margin-left: 0.5rem;
-          }
-          .prediction-bar-container {
-            display: flex;
-            align-items: center;
-            width: 40%;
-          }
-          .prediction-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #e5e7eb;
-            border-radius: 9999px;
-            overflow: hidden;
-            margin-right: 0.5rem;
-          }
-          .confidence-fill {
-            height: 100%;
-            background: linear-gradient(to right, #10b981, #34d399);
-            border-radius: 9999px;
-            transition: width 0.5s ease-in-out;
-          }
-          .recommendations-section {
-            grid-column: 1 / -1;
-            margin-top: 1rem;
-          }
-          .recommendations-card {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          }
-          .recommendations-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid #ecfdf5;
-          }
-          .recommendations-header h2 {
-            font-size: 1.5rem;
+
+          .glass-card h2 {
+            font-size: 1.4rem; /* Reduced from 1.8rem */
             font-weight: 700;
             color: #064e3b;
-            margin: 0;
+            margin-bottom: 1rem;
           }
-          .recommendations-content {
+
+          .upload-zone {
+            border: 2px dashed #d1d5db;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+            cursor: pointer;
+            position: relative;
+          }
+
+          .upload-zone:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+          }
+
+          .upload-placeholder {
+            color: #6b7280;
+          }
+
+          .upload-placeholder i {
+            font-size: 3rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+            display: block;
+          }
+
+          .preview-container {
+            margin-top: 1.5rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+          }
+
+          .preview-container img {
+            width: 100%;
+            display: block;
+            max-height: 300px;
+            object-fit: cover;
+          }
+
+          .clear-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+          }
+
+          .primary-action-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+          }
+
+          .primary-action-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+          }
+
+          .primary-action-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            box-shadow: none;
+          }
+
+          .how-it-works-grid {
+            margin-top: 2rem;
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.5rem;
           }
-          @media (min-width: 768px) {
-            .recommendations-content {
-              grid-template-columns: 1fr 1fr;
-            }
+
+          .work-step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
           }
-          .recommendation-card {
-            background: #f0fdfa;
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            border-left: 4px solid #10b981;
-          }
-          .recommendation-title {
+
+          .step-num {
+            width: 28px;
+            height: 28px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            margin-bottom: 0.75rem;
-          }
-          .recommendation-title h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #065f46;
-            margin: 0;
-          }
-          .recommendation-icon {
-            margin-right: 0.5rem;
-            color: #059669;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
             flex-shrink: 0;
           }
-          .recommendation-text {
-            line-height: 1.6;
-            color: #374151;
+
+          .step-text h4 {
+            font-size: 1rem;
+            margin: 0 0 4px 0;
+            color: #064e3b;
           }
-          .recommendation-list {
-            list-style-type: disc;
-            padding-left: 1.25rem;
-            margin-top: 0.5rem;
-            color: #374151;
+
+          .step-text p {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin: 0;
           }
-          .recommendation-list a {
-            color: #059669;
+
+          .prediction-item {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem; /* Reduced from 1.5rem */
+            border-radius: 16px;
+            background: white;
+            margin-bottom: 0.8rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+          }
+
+          .prediction-item.top {
+            border: 1.5px solid #10b981;
+            background: linear-gradient(to right, #ffffff, #f0fdf4);
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.08);
+          }
+
+          .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 0.65rem; /* Reduced from 0.75rem */
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+          }
+
+          .status-healthy { background: #dcfce7; color: #15803d; }
+          .status-warning { background: #fef9c3; color: #a16207; }
+          .status-critical { background: #fee2e2; color: #b91c1c; }
+
+          .pred-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+          }
+
+          .pred-name {
+            font-size: 0.95rem; /* Reduced from 1.1rem */
+            font-weight: 800;
+            color: #1e293b;
+            text-transform: capitalize;
+            line-height: 1.2;
+          }
+
+          .wellness-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+
+          .score-circle {
+            width: 32px; /* Reduced from 45px */
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.7rem;
+            border: 2px solid;
+          }
+
+          .pred-bar-bg {
+            height: 6px; /* Reduced from 8px */
+            background: #f1f5f9;
+            border-radius: 10px;
+            overflow: hidden;
+            flex: 1;
+          }
+
+          .pred-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease-out;
+          }
+
+          .fill-healthy { background: linear-gradient(90deg, #10b981, #34d399); }
+          .fill-warning { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+          .fill-critical { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+          .report-section {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+          }
+
+          .report-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px dashed #e2e8f0;
+          }
+
+          .report-header h2 {
+            font-size: 1.5rem; /* Reduced from 2.2rem */
+            margin: 0;
+            color: #064e3b;
+          }
+
+          .report-badge {
+            background: #064e3b;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+          }
+
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+
+          .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+          }
+
+          .report-block {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+          }
+
+          .block-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            color: #065f46;
+            font-weight: 700;
+            border-bottom: 1px solid #f3f4f6;
+            padding-bottom: 10px;
+          }
+
+          .block-header i { color: #10b981; }
+
+          .report-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #4b5563;
+          }
+
+          .scheme-list, .resource-list {
+            padding-left: 20px;
+            margin: 0;
+          }
+
+          .scheme-list li, .resource-list li {
+            margin-bottom: 10px;
+          }
+
+          .scheme-list a, .resource-list a {
+            color: #10b981;
             text-decoration: none;
             font-weight: 500;
           }
-          .recommendation-list a:hover {
+
+          .scheme-list a:hover, .resource-list a:hover {
             text-decoration: underline;
           }
+
+          .helpline-box {
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+          }
+
+          .helpline-box h4 { margin: 0 0 8px 0; font-size: 0.9rem; opacity: 0.8; }
+          .helpline-box .number { font-size: 1.5rem; font-weight: 800; display: block; }
         `}
       </style>
-        
-      <div className="header">
-        <div className="header-content">
-          <h1>Plant Disease Detection</h1>
-          <p>Upload an image of your plant, and our AI will detect possible diseases with expert recommendations.</p>
-        </div>
+
+      <NavBar />
+      <div className="disease-hero">
+        <h1>🌿 {t('diseaseDetectionTitle')}</h1>
+        <p>{t('diseaseDetectionSubtitle')}</p>
       </div>
 
       <div className="main-content">
-        <div className="upload-section">
-          <div className="upload-card">
-            <h2>Upload Plant Image</h2>
-            <label htmlFor="file-upload" className="custom-file-upload">Choose File</label>
-            <input id="file-upload" type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
-            {image && (
-              <div className="image-preview">
+        {/* Upload Section */}
+        <div className="glass-card">
+          <div className="card-header-icon">📸</div>
+          <h2>{t('uploadImage')}</h2>
+          
+          <div className="upload-zone" onClick={() => fileInputRef.current.click()}>
+            <input 
+              id="file-upload" 
+              type="file" 
+              accept="image/*" 
+              onChange={handleImageUpload} 
+              ref={fileInputRef} 
+              style={{display: 'none'}}
+            />
+            {!image ? (
+              <div className="upload-placeholder">
+                <i className="fas fa-cloud-upload-alt"></i>
+                <p>{t('chooseFile')}</p>
+                <small>Support for JPG, PNG, WEBP</small>
+              </div>
+            ) : (
+              <div className="preview-container">
                 <img src={image} alt="Uploaded plant" />
+                <button className="clear-image" onClick={(e) => { e.stopPropagation(); handleClear(); }}>×</button>
               </div>
             )}
-            <button disabled={!image || loading} onClick={handleDetect} className="detect-btn">
-              {loading ? (<><span className="spinner"></span>Analyzing...</>) : "Detect Disease"}
-            </button>
-            <div className="info-section">
-              <h4>How it works</h4>
-              <ul>
-                <li>Snap a Photo: Take a clear picture of the plant leaf showing the symptoms.</li>
-                <li>AI Analysis: Our powerful AI instantly analyzes your photo to identify the specific disease.</li>
-                <li>Get Your Plan: Receive an instant diagnosis and a step-by-step treatment plan to save your crop.</li>
-              </ul>
+          </div>
+
+          <button 
+            disabled={!image || loading} 
+            onClick={handleDetect} 
+            className="primary-action-btn"
+          >
+            {loading ? (
+              <>
+                <div className="spinner"></div>
+                {t('analyzing')}
+              </>
+            ) : (
+              <>
+                <span>🔍</span> {t('detectDiseaseBtn')}
+              </>
+            )}
+          </button>
+
+          <div className="how-it-works-grid">
+            <h3>{t('howItWorks')}</h3>
+            <div className="work-step">
+              <div className="step-num">1</div>
+              <div className="step-text">
+                <p>{t('step1')}</p>
+              </div>
+            </div>
+            <div className="work-step">
+              <div className="step-num">2</div>
+              <div className="step-text">
+                <p>{t('step2')}</p>
+              </div>
+            </div>
+            <div className="work-step">
+              <div className="step-num">3</div>
+              <div className="step-text">
+                <p>{t('step3')}</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="results-section">
-          <div className="results-card">
-            <h2>Prediction Results</h2>
-            <div className="results-content">
-              {error && (
-                <div className="error-message">
-                  <span>⚠️ {error}</span>
-                  <button onClick={() => setError("")} className="dismiss-btn">×</button>
-                </div>
-              )}
-              {predictions.length > 0 && !error && (
-                <ul className="predictions-list">
-                  {predictions.map((pred, idx) => (
-                    <li key={idx} className={`prediction-item ${idx === 0 ? 'top-prediction' : ''}`}>
-                      <div className="prediction-info">
-                        <span className="disease-name">{pred.name.replace(/_/g, ' ')}</span>
+        {/* Results Section */}
+        <div className="glass-card">
+          <div className="card-header-icon">📊</div>
+          <h2>{t('predictionResults')}</h2>
+          
+          <div className="results-content">
+            {error && (
+              <div className="error-message">
+                <span>⚠️ {error}</span>
+                <button onClick={() => setError("")} className="dismiss-btn">×</button>
+              </div>
+            )}
+            
+            {predictions.length > 0 && !error ? (
+              <div className="predictions-list">
+                {predictions.map((pred, idx) => {
+                  const isHealthy = pred.name.toLowerCase().includes('healthy');
+                  const isTop = idx === 0;
+                  const prob = Math.round(pred.prob * 100);
+                  
+                  let status = "critical";
+                  if (isHealthy) status = "healthy";
+                  else if (prob < 40) status = "warning";
+
+                  return (
+                    <div key={idx} className={`prediction-item ${isTop ? 'top' : ''}`}>
+                      <div className={`status-badge status-${status}`}>
+                        {status === 'healthy' ? '✅ Healthy' : status === 'warning' ? '⚠️ Moderate' : '🚨 Critical'}
                       </div>
-                      <div className="prediction-bar-container">
-                        <div className="prediction-bar">
-                          <div className="confidence-fill" style={{ width: `${pred.prob * 100}%` }}></div>
+                      
+                      <div className="pred-header">
+                        <span className="pred-name">{pred.name.replace(/_/g, ' ')}</span>
+                        <div className="wellness-indicator">
+                          <div className={`score-circle`} style={{ borderColor: status === 'healthy' ? '#10b981' : status === 'warning' ? '#f59e0b' : '#ef4444', color: status === 'healthy' ? '#10b981' : status === 'warning' ? '#f59e0b' : '#ef4444' }}>
+                            {prob}%
+                          </div>
                         </div>
-                        <span className="confidence-value">{Math.round(pred.prob * 100)}%</span>
                       </div>
-                    </li>
+
+                      <div className="pred-bar-bg">
+                        <div 
+                          className={`pred-bar-fill fill-${status}`} 
+                          style={{ width: `${prob}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : !error && (
+              <div style={{textAlign: 'center', color: '#6b7280', padding: '40px 0'}}>
+                <i className="fas fa-microscope" style={{fontSize: '3rem', opacity: 0.2, marginBottom: '15px', display: 'block'}}></i>
+                {t('noPredictions')}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Diagnostic Report Section */}
+        {diseaseInfo && (
+          <div className="report-section glass-card">
+            <div className="report-header">
+              <div className="card-header-icon">📋</div>
+              <div>
+                <span className="report-badge">Official Diagnostic Report</span>
+                <h2>{diseaseInfo.disease} {t('on')} {diseaseInfo.crop}</h2>
+              </div>
+            </div>
+            
+            <div className="report-grid">
+              <div className="report-block">
+                <div className="block-header"><i>🔬</i> {t('symptoms')}</div>
+                <p className="report-text">{diseaseInfo.symptoms}</p>
+              </div>
+
+              <div className="report-block">
+                <div className="block-header"><i>💊</i> {t('treatment')}</div>
+                <p className="report-text">{diseaseInfo.treatment}</p>
+              </div>
+
+              <div className="report-block">
+                <div className="block-header"><i>🛡️</i> {t('prevention')}</div>
+                <p className="report-text">{diseaseInfo.prevention}</p>
+              </div>
+
+              <div className="report-block">
+                <div className="block-header"><i>🏛️</i> {t('govSchemes')}</div>
+                <ul className="scheme-list">
+                  {diseaseInfo.schemes.map((scheme, index) => {
+                    const [name, link] = scheme.split(': ');
+                    return <li key={index}><a href={link} target="_blank" rel="noopener noreferrer">{name}</a></li>
+                  })}
+                </ul>
+              </div>
+
+              <div className="report-block">
+                <div className="block-header"><i>📚</i> {t('helpfulResources')}</div>
+                <ul className="resource-list">
+                  {diseaseInfo.resources.map((res, index) => (
+                    <li key={index}><a href={res.link} target="_blank" rel="noopener noreferrer">{res.name}</a></li>
                   ))}
                 </ul>
-              )}
-              {predictions.length === 0 && !error && (
-                 <div style={{textAlign: 'center', color: '#6b7280'}}>No predictions yet. Upload an image to start.</div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {diseaseInfo && (
-          <div className="recommendations-section">
-            <div className="recommendations-card">
-              <div className="recommendations-header">
-                <h2>{diseaseInfo.disease} on {diseaseInfo.crop}</h2>
               </div>
-              <div className="recommendations-content">
-                <div className="recommendation-card">
-                  <div className="recommendation-title"><h3>Symptoms</h3></div>
-                  <p className="recommendation-text">{diseaseInfo.symptoms}</p>
-                </div>
-                
-                <div className="recommendation-card">
-                  <div className="recommendation-title"><h3>Treatment</h3></div>
-                  <p className="recommendation-text">{diseaseInfo.treatment}</p>
-                </div>
 
-                <div className="recommendation-card">
-                  <div className="recommendation-title"><h3>Prevention</h3></div>
-                  <p className="recommendation-text">{diseaseInfo.prevention}</p>
-                </div>
-
-                <div className="recommendation-card">
-                  <div className="recommendation-title"><h3>Government Schemes</h3></div>
-                  <ul className="recommendation-list">
-                    {diseaseInfo.schemes.map((scheme, index) => {
-                       const [name, link] = scheme.split(': ');
-                       return <li key={index}><a href={link} target="_blank" rel="noopener noreferrer">{name}</a></li>
-                    })}
-                  </ul>
-                </div>
-                
-                <div className="recommendation-card">
-                  <div className="recommendation-title"><h3>Helpful Resources</h3></div>
-                  <ul className="recommendation-list">
-                     {diseaseInfo.resources.map((res, index) => (
-                       <li key={index}><a href={res.link} target="_blank" rel="noopener noreferrer">{res.name}</a></li>
-                     ))}
-                  </ul>
-                </div>
-                
-                 <div className="recommendation-card">
-                  <div className="recommendation-title"><h3>Farmer Helpline</h3></div>
-                  <p className="recommendation-text">Call: {diseaseInfo.helpline}</p>
-                </div>
-
+              <div className="helpline-box">
+                <h4>{t('farmerHelpline')}</h4>
+                <span className="number">{diseaseInfo.helpline}</span>
               </div>
             </div>
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

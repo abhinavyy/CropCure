@@ -131,13 +131,56 @@
   background: #00ccff; /* optional active color */
 }
 
+/* Language Switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lang-btn {
+  background: none !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  padding: 0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.lang-btn::after {
+  display: none !important;
+}
+
+.lang-btn.active {
+  color: #10b981 !important;
+}
+
+.lang-btn:hover {
+  color: white !important;
+}
+
+.lang-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .navbar {
     height: 60px;
     padding: 8px 20px;
-    flex-direction: column;
+    flex-direction: row; /* Fixed: should be row to keep logo/hamburger spread */
     border-radius: 10px;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
   }
 
   .navbar-links {
@@ -163,5 +206,10 @@
 
   .hamburger {
     display: flex;
+  }
+
+  .lang-switcher {
+    margin-left: 0;
+    margin-top: 10px;
   }
 }

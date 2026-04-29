@@ -5,17 +5,17 @@
       {
         "crop": "Chili",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Use disease-free seeds for best yield."
+        "recommendation": "Use clean, high-quality seeds. Leave enough space between plants so they can grow. Watch closely for small insects like thrips during the first 2 months."
       },
       {
         "crop": "Groundnut",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Profitable oilseed crop requiring well-drained soil."
+        "recommendation": "Plant in loose, sandy soil. Add Gypsum powder about 40 days after planting to help the pods grow bigger and have more oil."
       },
       {
         "crop": "Paddy",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Cultivate in irrigated areas, water management essential."
+        "recommendation": "Main crop for the rainy season. Keep a small amount of water (about 2 inches) in the field. Use the right amount of fertilizer to get a better harvest."
       }
     ]
   },
@@ -25,17 +25,17 @@
       {
         "crop": "Rice",
         "plantingMonths": ["Apr", "May"],
-        "recommendation": "Main crop grown in terrace fields, requires heavy rainfall."
+        "recommendation": "Best for step-farming (terrace). Use improved local seeds. Make sure the field walls are strong to hold the rainwater."
       },
       {
         "crop": "Maize",
         "plantingMonths": ["Mar", "Apr"],
-        "recommendation": "Grows well in hilly regions with moderate rainfall."
+        "recommendation": "Plant in fields where water does not stand. Remove weeds early, especially in the first month, so the corn can grow strong."
       },
       {
         "crop": "Millet",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Drought-resistant and suitable for upland cultivation."
+        "recommendation": "Good for dry land. Does not need much water. Harvest when most of the grains turn brown."
       }
     ]
   },
@@ -45,22 +45,22 @@
       {
         "crop": "Rice",
         "plantingMonths": ["Apr", "May"],
-        "recommendation": "Main staple with early summer planting."
+        "recommendation": "In areas that flood, use seeds that can survive under water. Plant early in summer to avoid heavy floods during harvest time."
       },
       {
         "crop": "Tea",
         "plantingMonths": ["Mar", "Apr"],
-        "recommendation": "Requires well-drained hilly terrain and ample rainfall."
+        "recommendation": "Plant on hills where water flows away easily. Keep shade trees in the garden. Cut back the bushes every 3 years to keep them healthy."
       },
       {
         "crop": "Jute",
         "plantingMonths": ["Feb", "Mar"],
-        "recommendation": "Grown in hot, humid conditions with plenty of water."
+        "recommendation": "Needs hot and humid weather. Harvest when the flowers start appearing to get the best fiber."
       },
       {
         "crop": "Pineapple",
         "plantingMonths": ["Jan", "Feb"],
-        "recommendation": "Grows well in humid conditions, harvested year-round."
+        "recommendation": "Plant in double rows to save space. Cover the ground to stop weeds from growing and keep the soil moist."
       }
     ]
   },
@@ -70,22 +70,22 @@
       {
         "crop": "Rice",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Kharif season crop requiring ample water."
+        "recommendation": "Plant young seedlings (about 3 weeks old). Use Zinc powder to prevent leaves from turning yellow (Khaira disease)."
       },
       {
         "crop": "Wheat",
         "plantingMonths": ["Nov", "Dec"],
-        "recommendation": "Rabi crop needing proper irrigation."
+        "recommendation": "Give the first water 21 days after sowing. Make sure the soil is damp and fine when you plant the seeds."
       },
       {
         "crop": "Maize",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Alternative Kharif crop suitable in rainfed areas."
+        "recommendation": "Gives good yield in this area. Ensure water does not stand in the field, as it can stop the plant from growing."
       },
       {
         "crop": "Sugarcane",
         "plantingMonths": ["Feb", "Mar"],
-        "recommendation": "Requires high water availability, profitable crop."
+        "recommendation": "Plant in deep lines (trenches) to save water. Use healthy pieces of cane with at least 3 buds for planting."
       }
     ]
   },
@@ -95,17 +95,17 @@
       {
         "crop": "Rice",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Kharif rice, requires abundant water and warm weather."
+        "recommendation": "In salty lands near the sea, use special salt-tolerant seeds. Add natural manure before the first rains start."
       },
       {
         "crop": "Cashew",
         "plantingMonths": ["Jan", "Feb"],
-        "recommendation": "Thrives in laterite soil, needs moderate rainfall."
+        "recommendation": "Trim the young plants so they grow strong. Spray medicine if you see small insects on the flowers."
       },
       {
         "crop": "Coconut",
         "plantingMonths": ["Jan", "Feb"],
-        "recommendation": "Grows well in coastal belts with good drainage."
+        "recommendation": "Add a little salt around the tree once a year to get more coconuts. Keep the area around the tree clean and watered."
       }
     ]
   },
@@ -115,17 +115,17 @@
       {
         "crop": "Wheat",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Sown in Rabi season, needs cool climate and irrigation."
+        "recommendation": "Best time to plant is the first two weeks of November. Use a machine to plant directly in the old rice straw to save time and soil."
       },
       {
         "crop": "Rice",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Kharif crop requiring water supply."
+        "recommendation": "Basmati rice is very profitable. You can sow seeds directly in the field to save water. Watch out for stem-eating worms."
       },
       {
         "crop": "Sugarcane",
         "plantingMonths": ["Feb", "Mar"],
-        "recommendation": "Requires prolonged irrigation, commercially valuable crop."
+        "recommendation": "Needs lots of fertilizer and water. Tie the canes together in August so they don't fall over in the wind."
       }
     ]
   },
@@ -135,17 +135,17 @@
       {
         "crop": "Rice",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Main Kharif crop, suitable for lowlands with adequate water."
+        "recommendation": "On high ground, use seeds that don't need much water. Use natural farm manure to help the red soil hold more water."
       },
       {
         "crop": "Maize",
         "plantingMonths": ["Mar", "Apr"],
-        "recommendation": "Suitable as Rabi crop in uplands."
+        "recommendation": "Water the crop when the flowers start appearing. This is the most important time for the corn to grow."
       },
       {
         "crop": "Lentil",
         "plantingMonths": ["Nov", "Dec"],
-        "recommendation": "Rabi pulse crop fixing nitrogen, improving soil health."
+        "recommendation": "Plant in the moist soil right after the rice harvest. It helps make the soil healthy for the next crop."
       }
     ]
   },
@@ -155,22 +155,22 @@
       {
         "crop": "Tomato",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Plant after monsoon ends, requires fertile soil."
+        "recommendation": "Use sticks to support the plants so the tomatoes don't touch the ground. This keeps them healthy and prevents rot."
       },
       {
         "crop": "Ragi",
         "plantingMonths": ["Aug", "Sep"],
-        "recommendation": "Drought tolerant and in demand cereal."
+        "recommendation": "A very strong crop that can grow even with little rain. It is very healthy and good for the soil."
       },
       {
         "crop": "Cotton",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Suitable for black cotton soil under monsoon."
+        "recommendation": "Grows best in black soil. Use yellow sticky cards in the field to catch small insects early."
       },
       {
         "crop": "Groundnut",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Oilseed crop needing well-drained soil and moderate rainfall."
+        "recommendation": "Make sure the soil is loose so the pods can grow easily underground. Avoid letting water stand in the field."
       }
     ]
   },
@@ -180,17 +180,17 @@
       {
         "crop": "Cotton",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Main cash crop on black soil, planting during monsoon."
+        "recommendation": "Don't plant too late to avoid worm attacks. Use small traps (pheromone) in the field to check for pests."
       },
       {
         "crop": "Sugarcane",
         "plantingMonths": ["Feb", "Mar"],
-        "recommendation": "Requires good irrigation, long duration crop."
+        "recommendation": "Use drip pipes to save water. Cover the ground with old leaves to keep the soil moist and stop weeds."
       },
       {
         "crop": "Soybean",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Short-duration crop, suitable for black and red soils."
+        "recommendation": "Treat the seeds before planting to help them grow better. Harvest when the pods turn golden yellow."
       }
     ]
   },
@@ -200,17 +200,17 @@
       {
         "crop": "Rice",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Kharif crop requiring good water supply."
+        "recommendation": "Plant in straight lines to make it easier to remove weeds. Use lights at night to catch and kill harmful moths."
       },
       {
         "crop": "Black Gram",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Rabi pulse crop suitable for upland areas."
+        "recommendation": "Best to grow after the rice harvest. It does not need much water and makes the soil richer."
       },
       {
         "crop": "Groundnut",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Requires well-drained soil, profitable oilseed."
+        "recommendation": "Treat seeds with medicine to stop the roots from rotting. Keep the soil moist when the flowers are blooming."
       }
     ]
   },
@@ -220,22 +220,22 @@
       {
         "crop": "Wheat",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Sow wheat preferably from 4th week of October to 4th week of November. Use certified seeds, maintain proper irrigation. Grow in cool climate with 15-22°C."
+        "recommendation": "Plant in the first half of November. Give the first water 3 weeks after sowing. Use good quality, certified seeds."
       },
       {
         "crop": "Mustard",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Plant as Rabi crop for good profitability."
+        "recommendation": "Plant when the weather starts getting cool. Watch out for small green insects (aphids) on the leaves."
       },
       {
         "crop": "Sunflower",
         "plantingMonths": ["Feb", "Mar"],
-        "recommendation": "Multiple harvests possible, plant in climate suitable for sunflower."
+        "recommendation": "Needs regular watering when the flowers are growing. Protect the field from birds when the seeds are ripening."
       },
       {
         "crop": "Barley",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Short-duration Rabi crop, suitable for cool climate and well-drained soil."
+        "recommendation": "Can grow well even in poor soil. Needs less water than wheat. Good for animal feed and other uses."
       }
     ]
   },
@@ -245,17 +245,17 @@
       {
         "crop": "Bajra (Pearl Millet)",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Drought resistant crop suitable for arid regions."
+        "recommendation": "The most important crop for this area. It can grow with very little water. Remove extra small plants after 2 weeks so the rest can grow big."
       },
       {
         "crop": "Wheat",
         "plantingMonths": ["Nov", "Dec"],
-        "recommendation": "Grown in irrigated areas during Rabi season."
+        "recommendation": "Needs proper watering. Use sprinklers if you have sandy soil to save water. It helps get better quality grain."
       },
       {
         "crop": "Moong (Green Gram)",
         "plantingMonths": ["Jul", "Aug"],
-        "recommendation": "Short-duration pulse crop suitable for rainfed and irrigated regions."
+        "recommendation": "A safe crop for dry land. Harvest as soon as it is ready to avoid damage from dry weather."
       }
     ]
   },
@@ -265,17 +265,17 @@
       {
         "crop": "Rice",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Main Kharif crop, requires irrigated conditions."
+        "recommendation": "Short-duration crop. Keep a very thin layer of water in the field after the flowers appear."
       },
       {
         "crop": "Sugarcane",
         "plantingMonths": ["Feb", "Mar"],
-        "recommendation": "Water-intensive, profitable commercial crop."
+        "recommendation": "Use modern methods to get more yield with less water. Drip irrigation is the best for this crop here."
       },
       {
         "crop": "Millets",
         "plantingMonths": ["Sep", "Oct"],
-        "recommendation": "Suitable for dryland areas, drought tolerant."
+        "recommendation": "Grows well in dry areas. Can survive even if it gets very hot. Harvest when the seeds feel hard."
       }
     ]
   },
@@ -285,22 +285,22 @@
       {
         "crop": "Wheat",
         "plantingMonths": ["Nov", "Dec"],
-        "recommendation": "Cool season crop with irrigation."
+        "recommendation": "Needs 6 waterings at important times, starting from 3 weeks after planting. Use the right amount of mixed fertilizer."
       },
       {
         "crop": "Sugarcane",
         "plantingMonths": ["Feb", "Apr"],
-        "recommendation": "Water-intensive crop with high market demand."
+        "recommendation": "Plant in deep pits to get a massive harvest. Watch out for worms that eat the top or roots of the cane."
       },
       {
         "crop": "Maize",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Fast-growing, grows well in rainy season."
+        "recommendation": "Needs lots of fertilizer to grow fast. Watch out for worms that eat the corn cobs."
       },
       {
         "crop": "Pulses",
         "plantingMonths": ["Oct", "Nov"],
-        "recommendation": "Grow pigeon pea or lentils during Rabi, good for soil health."
+        "recommendation": "Arhar is a main crop. Ensure water does not stand in the field when the plants are small. It helps keep the soil healthy."
       }
     ]
   },
@@ -310,22 +310,22 @@
       {
         "crop": "Rice-Aus",
         "plantingMonths": ["Mar", "Apr"],
-        "recommendation": "Sow in early summer, ensure proper water management."
+        "recommendation": "Early rice crop. Sow directly in the field. Choose seeds that can grow even if there is less rain early on."
       },
       {
         "crop": "Rice-Aman",
         "plantingMonths": ["Jun", "Jul"],
-        "recommendation": "Main Kharif season rice, water management crucial."
+        "recommendation": "The most important rice crop. Keep water in the field for 10 days after planting the young rice."
       },
       {
         "crop": "Rice-Boro",
         "plantingMonths": ["Nov", "Dec"],
-        "recommendation": "Rabi season rice very profitable with irrigation."
+        "recommendation": "Winter rice that gives a high yield. Needs a regular water supply from a pump or well."
       },
       {
         "crop": "Jute",
         "plantingMonths": ["Mar", "Apr"],
-        "recommendation": "Requires hot and humid climate with plenty of rainfall."
+        "recommendation": "The 'Golden Fiber'. Harvest after 4 months to get the strongest fiber for making ropes and bags."
       }
     ]
   }

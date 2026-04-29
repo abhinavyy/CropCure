@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -7,6 +8,7 @@ const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const navigate = useNavigate();
+  const { language, toggleLanguage, t } = useLanguage();
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
@@ -49,10 +51,31 @@ const Navbar = () => {
 
       <ul className={`navbar-links ${menuActive ? "active" : ""}`}>
         <li>
-          <button onClick={() => goToSection("features")}>Features</button>
+          <button onClick={() => goToSection("features")}>{t('features')}</button>
         </li>
         <li>
-          <button onClick={() => goToSection("contact")}>Contact</button>
+          <button onClick={() => navigate("/about")}>{t('about')}</button>
+        </li>
+        <li>
+          <button onClick={() => goToSection("contact")}>{t('contact')}</button>
+        </li>
+        <li>
+          <button onClick={() => navigate("/news")}>{t('news')}</button>
+        </li>
+        <li className="lang-switcher">
+          <button 
+            className={`lang-btn ${language === 'en' ? 'active' : ''}`} 
+            onClick={() => toggleLanguage('en')}
+          >
+            EN
+          </button>
+          <span className="lang-divider">|</span>
+          <button 
+            className={`lang-btn ${language === 'hi' ? 'active' : ''}`} 
+            onClick={() => toggleLanguage('hi')}
+          >
+            HI
+          </button>
         </li>
       </ul>
 
