@@ -9,11 +9,7 @@ groq
 tavily-python
 requests
 
-# RAG pipeline
-faiss-cpu
-sentence-transformers
-
-# ML / Image processing
+# ML / Image processing (CPU-only, minimal)
 torch --index-url https://download.pytorch.org/whl/cpu
 torchvision --index-url https://download.pytorch.org/whl/cpu
 Pillow
